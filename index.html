@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#06101e" />
+  <meta name="description" content="Точка опоры — рабочее пространство психолога и клиента: сессии, сценарии, задания и динамика." />
+  <title>Точка опоры — рабочее пространство психолога и клиента</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css?v=153" />
+  <link rel="stylesheet" href="pilot.css?v=153" />
+  <link rel="stylesheet" href="workspace.css?v=153" />
+  <link rel="stylesheet" href="general.css?v=153" />
+  <link rel="stylesheet" href="v15.css?v=153" />
+  <link rel="stylesheet" href="supabase.css?v=153" />
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Основная навигация">
+      <button class="brand" data-view="dashboard" aria-label="Точка опоры — обзор">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="21"/><circle cx="32" cy="32" r="10"/><path d="M32 4v9M32 51v9M4 32h9M51 32h9"/><path class="brand-accent" d="M32 32 47 18"/></svg>
+        </span>
+        <span class="brand-copy"><strong>Точка опоры</strong><small>кабинет психолога</small></span>
+      </button>
+
+      <nav class="main-nav">
+        <button class="active" data-view="dashboard"><span class="nav-icon">⌂</span><span>Обзор</span></button>
+        <button data-view="clients"><span class="nav-icon">◫</span><span>Клиенты</span><b id="clientsCountBadge">0</b></button>
+        <button data-view="sessions"><span class="nav-icon">◎</span><span>Сессии</span></button>
+        <button data-view="assessment"><span class="nav-icon">◇</span><span>Сценарии</span></button>
+        <button data-view="plan"><span class="nav-icon">⌁</span><span>План работы</span></button>
+        <button data-view="dynamics"><span class="nav-icon">⌇</span><span>Динамика</span></button>
+        <button data-view="templates"><span class="nav-icon">▤</span><span>Шаблоны</span></button>
+      </nav>
+
+      <section class="active-client-mini" id="activeClientMini"></section>
+
+      <div class="privacy-card">
+        <span class="privacy-dot"></span>
+        <div><strong>Локальное хранение</strong><p>Данные остаются в браузере этого устройства.</p></div>
+      </div>
+
+      <button class="settings-link" data-view="settings"><span>⚙</span> Настройки и резервная копия</button>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark small" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="21"/><circle cx="32" cy="32" r="10"/><path d="M32 4v9M32 51v9M4 32h9M51 32h9"/><path class="brand-accent" d="M32 32 47 18"/></svg></span><strong>Точка опоры</strong></div>
+        <div class="topbar-title"><small id="pageEyebrow">Рабочий кабинет</small><h1 id="pageTitle">Обзор практики</h1></div>
+        <div class="topbar-search">
+          <span>⌕</span><input id="globalSearch" type="search" placeholder="Найти клиента, сессию или задачу…" autocomplete="off" />
+        </div>
+        <div class="topbar-actions">
+          <span class="mode-badge">Локальный режим</span>
+          <button class="icon-button" id="quickAddSession" title="Новая сессия">＋</button>
+          <button class="icon-button mobile-settings" data-view="settings" title="Настройки">⚙</button>
+          <button class="primary-button compact" id="quickAddClient">Новый клиент</button>
+        </div>
+      </header>
+
+      <main id="viewRoot" class="view-root" aria-live="polite"></main>
+    </div>
+  </div>
+
+  <div class="modal" id="clientModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="modal-dialog medium" role="dialog" aria-modal="true" aria-labelledby="clientModalTitle">
+      <button class="modal-close" data-close-modal aria-label="Закрыть">×</button>
+      <span class="section-label">Карточка клиента</span>
+      <h2 id="clientModalTitle">Новый клиент</h2>
+      <form id="clientForm" class="form-grid">
+        <input type="hidden" name="id" />
+        <label><span>Имя или псевдоним</span><input name="name" required maxlength="80" placeholder="Например, Анна К." /></label>
+        <label><span>Возраст</span><input name="age" type="number" min="16" max="100" placeholder="38" /></label>
+        <label><span>Контакт</span><input name="contact" maxlength="120" placeholder="Телефон, e-mail или мессенджер" /></label>
+        <label><span>Статус</span><select name="status"><option value="active">В работе</option><option value="pause">Пауза</option><option value="completed">Работа завершена</option></select></label>
+        <label class="full"><span>Первичный запрос</span><textarea name="request" rows="3" maxlength="1000" placeholder="С чем клиент пришёл и какого изменения ожидает"></textarea></label>
+        <label class="full"><span>Контекст</span><textarea name="context" rows="3" maxlength="1200" placeholder="Работа, семейная ситуация, ограничения, важные обстоятельства"></textarea></label>
+        <label><span>Следующая встреча</span><input name="nextSession" type="date" /></label>
+        <label><span>Время</span><input name="nextSessionTime" type="time" /></label>
+        <div class="form-actions full"><button type="button" class="quiet-button" data-close-modal>Отмена</button><button class="primary-button" type="submit">Сохранить карточку</button></div>
+      </form>
+    </section>
+  </div>
+
+  <div class="modal" id="sessionModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="modal-dialog large" role="dialog" aria-modal="true" aria-labelledby="sessionModalTitle">
+      <button class="modal-close" data-close-modal aria-label="Закрыть">×</button>
+      <span class="section-label">Протокол встречи</span>
+      <h2 id="sessionModalTitle">Новая сессия</h2>
+      <form id="sessionForm" class="form-grid session-form">
+        <input type="hidden" name="id" />
+        <label><span>Клиент</span><select name="clientId" id="sessionClientSelect" required></select></label>
+        <label><span>Дата</span><input name="date" type="date" required /></label>
+        <label><span>Формат</span><select name="format"><option>Онлайн</option><option>Очно</option><option>Телефон</option><option>Асинхронный разбор</option></select></label>
+        <label><span>Длительность, минут</span><input name="duration" type="number" min="10" max="240" value="60" /></label>
+        <label><span>Состояние до, 0–10</span><input name="stateBefore" type="range" min="0" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><output>5</output></label>
+        <label><span>Состояние после, 0–10</span><input name="stateAfter" type="range" min="0" max="10" value="6" oninput="this.nextElementSibling.textContent=this.value"><output>6</output></label>
+        <label class="full"><span>Тема и фокус встречи</span><input name="theme" required maxlength="180" placeholder="Например: повторяющийся конфликт, перегрузка или сложный выбор" /></label>
+        <label class="full"><span>Ключевые высказывания и наблюдения</span><textarea name="notes" rows="5" maxlength="5000" placeholder="Факты, формулировки клиента, изменения, противоречия. Без лишних интерпретаций."></textarea></label>
+        <label class="full"><span>Рабочая гипотеза / смысловой фокус</span><textarea name="hypothesis" rows="3" maxlength="2500" placeholder="Что сейчас поддерживает проблему и что требует проверки"></textarea></label>
+        <label class="full"><span>Интервенции и вопросы</span><textarea name="interventions" rows="3" maxlength="2500" placeholder="Какие вопросы, упражнения и способы отражения использовались"></textarea></label>
+        <label class="full"><span>Договорённость до следующей встречи</span><textarea name="homework" rows="3" maxlength="1800" placeholder="Небольшой проверяемый шаг, наблюдение или эксперимент"></textarea></label>
+        <label class="full"><span>Следующий фокус</span><input name="nextFocus" maxlength="300" placeholder="Что важно продолжить или перепроверить" /></label>
+        <div class="form-actions full"><button type="button" class="quiet-button" data-close-modal>Отмена</button><button class="primary-button" type="submit">Сохранить протокол</button></div>
+      </form>
+    </section>
+  </div>
+
+  <div class="modal" id="goalModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="modal-dialog medium" role="dialog" aria-modal="true" aria-labelledby="goalModalTitle">
+      <button class="modal-close" data-close-modal aria-label="Закрыть">×</button>
+      <span class="section-label">План работы</span>
+      <h2 id="goalModalTitle">Новая цель</h2>
+      <form id="goalForm" class="form-grid">
+        <input type="hidden" name="id" />
+        <label><span>Клиент</span><select name="clientId" id="goalClientSelect" required></select></label>
+        <label><span>Срок проверки</span><input name="deadline" type="date" /></label>
+        <label class="full"><span>Рабочая цель</span><input name="title" required maxlength="220" placeholder="Конкретное изменение, которое можно проверить" /></label>
+        <label class="full"><span>Признак продвижения</span><textarea name="metric" rows="2" maxlength="800" placeholder="По каким наблюдаемым признакам станет ясно, что есть движение"></textarea></label>
+        <label class="full"><span>Первый шаг</span><input name="firstStep" maxlength="300" placeholder="Маленькое действие до следующей сессии" /></label>
+        <div class="form-actions full"><button type="button" class="quiet-button" data-close-modal>Отмена</button><button class="primary-button" type="submit">Добавить цель</button></div>
+      </form>
+    </section>
+  </div>
+
+  <section class="assessment-overlay" id="assessmentOverlay" aria-hidden="true">
+    <div class="assessment-shell">
+      <aside class="assessment-sidebar">
+        <div class="assessment-brand"><span class="brand-mark small" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="21"/><circle cx="32" cy="32" r="10"/><path d="M32 4v9M32 51v9M4 32h9M51 32h9"/><path class="brand-accent" d="M32 32 47 18"/></svg></span><div><strong>Рабочий сценарий</strong><small id="assessmentClientName">Клиент</small></div></div>
+        <nav id="assessmentSteps" class="assessment-steps"></nav>
+        <div class="assessment-note"><strong>Роль психолога</strong><p>Результат служит опорой для обсуждения, а не автоматическим заключением.</p></div>
+      </aside>
+      <div class="assessment-main">
+        <header class="assessment-header"><div><small id="assessmentScenarioLabel">Выбор маршрута</small><strong id="assessmentStepLabel">Шаг 1</strong></div><button class="pause-button" id="closeAssessment">Сохранить и выйти</button></header>
+        <div class="assessment-progress"><span id="assessmentProgressFill"></span></div>
+        <main class="assessment-body" id="assessmentBody"></main>
+        <footer class="assessment-controls" id="assessmentControls"><button class="quiet-button" id="assessmentBack">← Назад</button><button class="primary-button" id="assessmentNext" disabled>Продолжить →</button></footer>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal" id="reportModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="modal-dialog report-dialog" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
+      <button class="modal-close no-print" data-close-modal aria-label="Закрыть">×</button>
+      <div id="reportContent"></div>
+      <div class="form-actions no-print"><button class="quiet-button" data-close-modal>Закрыть</button><button class="primary-button" id="printReport">Печать / PDF</button></div>
+    </section>
+  </div>
+
+  <input type="file" id="importFile" accept="application/json" hidden />
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>window.__TOCHKA_SUPABASE_MODE=true;</script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js?v=153"></script>
+  <script src="app.js?v=153"></script>
+  <script src="pilot.js?v=153"></script>
+  <script src="general.js?v=153"></script>
+  <script src="workspace.js?v=153"></script>
+  <script src="v15.js?v=153"></script>
+  <script src="supabase-app.js?v=153"></script>
+</body>
+</html>

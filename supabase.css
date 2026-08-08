@@ -1,2 +1,174 @@
 .sb-auth-shell{max-width:1060px}.sb-setup-card{max-width:760px;margin:34px auto;background:rgba(13,28,49,.94);border:1px solid rgba(126,164,220,.22);border-radius:26px;padding:32px}.sb-setup-card h1{margin:10px 0 12px}.sb-config-preview{padding:12px 14px;margin:16px 0;border-radius:12px;background:rgba(75,132,255,.11);font-family:ui-monospace,Consolas,monospace;overflow-wrap:anywhere}.sb-register-toggle{margin-top:12px}.sb-test-mini{display:grid;grid-template-columns:100px 1fr;gap:8px 12px;margin-top:20px;padding:16px;border-radius:16px;background:rgba(255,255,255,.035)}.sb-test-lab{margin-bottom:14px;border-color:rgba(244,200,75,.27)!important;background:linear-gradient(135deg,rgba(244,200,75,.08),rgba(61,120,255,.05))!important}.sb-test-flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}.sb-test-flow span{padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.045);font-size:13px}.sb-test-flow b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;margin-right:6px;background:#f4c84b;color:#151d2b}.sb-test-flow i{opacity:.45}.sb-preset-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}.sb-preset-grid button{padding:14px;text-align:left;border-radius:15px;border:1px solid rgba(126,164,220,.2);background:rgba(255,255,255,.035);color:inherit;cursor:pointer}.sb-preset-grid button:hover{border-color:#6b93ff;background:rgba(61,120,255,.09)}.sb-preset-grid strong{display:block;margin-bottom:6px}.sb-preset-grid small{display:block;line-height:1.45;color:#9eb0c9}.sb-test-custom{display:flex;gap:10px}.sb-test-custom input{flex:1}.sb-test-badge,.sb-live-badge{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.04em}.sb-test-badge{background:rgba(244,200,75,.16);color:#f6d86e;border:1px solid rgba(244,200,75,.25)}.sb-live-badge{background:rgba(61,120,255,.12);color:#9bb8ff;border:1px solid rgba(61,120,255,.2)}.sb-inline-test{font-size:13px}.sb-test-client{outline:1px solid rgba(244,200,75,.22);background:linear-gradient(145deg,rgba(244,200,75,.035),transparent)}.sb-client-access-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:0 0 14px;padding:13px 16px;border:1px solid rgba(126,164,220,.16);border-radius:16px;background:rgba(8,20,36,.72)}.sb-client-access-bar>div:first-child{display:flex;flex-direction:column;gap:6px}.sb-client-access-bar>div:last-child{display:flex;gap:8px;flex-wrap:wrap}.sb-client-access-bar small{color:#8fa5c0}.danger-soft{border-color:rgba(199,75,80,.3)!important;color:#ef9b9f!important}.sb-normal-note{grid-column:1/-1;padding:10px 12px;border-radius:10px;background:rgba(61,120,255,.07);color:#9eb0c9;font-size:12px}.work-login-card form label{display:block;margin:12px 0}.work-login-card form label span{display:block;margin-bottom:6px;font-size:12px;color:#a7b6ca}.work-login-card form input{width:100%}
 @media(max-width:760px){.sb-preset-grid{grid-template-columns:1fr}.sb-client-access-bar{align-items:flex-start;flex-direction:column}.sb-test-custom{flex-direction:column}.sb-test-flow i{display:none}.sb-test-flow span{width:100%}}
+
+/* =========================================================
+   v15.4 — MOBILE FIRST / "БАБКИН ТЕСТ"
+   Клиент: один экран — одно действие, крупные ответы, минимум набора.
+   Психолог: крупные карточки и формы без горизонтальной прокрутки.
+   ========================================================= */
+@media (max-width:760px){
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{font-size:16px;line-height:1.5;overflow-x:hidden}
+  button,input,select,textarea{font-size:16px!important}
+  button,a,input,select,textarea{touch-action:manipulation}
+  input,select,textarea{max-width:100%}
+
+  /* ВХОД: без двух колонок и без мелкого текста */
+  .work-login-gate{place-items:start center;padding:max(14px,env(safe-area-inset-top)) 12px max(18px,env(safe-area-inset-bottom));overflow-y:auto}
+  .work-login-shell{width:100%;max-width:520px;margin:0 auto}
+  .work-login-brand{gap:12px;margin:4px 2px 14px}
+  .work-login-mark{width:52px;height:52px;border-radius:16px;font-size:28px}
+  .work-login-brand strong{font-size:22px;line-height:1.15}
+  .work-login-brand small{font-size:14px;line-height:1.35;margin-top:4px}
+  .work-login-grid{grid-template-columns:1fr;gap:12px}
+  .work-login-card{padding:20px 16px;border-radius:20px}
+  .work-login-card h1,.work-login-card h2{font-size:28px;line-height:1.14;margin:9px 0 12px}
+  .work-login-card p{font-size:16px;line-height:1.55;min-height:0;margin:0 0 14px}
+  .work-login-kicker{font-size:12px;letter-spacing:.12em}
+  .work-login-card form{gap:14px;margin-top:18px}
+  .work-login-card form label span{font-size:15px;margin-bottom:8px}
+  .work-login-card form input{height:56px;border-radius:14px;padding:0 15px;letter-spacing:0}
+  .work-login-card button,.primary-button,.quiet-button,.danger-button{min-height:54px!important;font-size:16px!important;border-radius:14px}
+  .work-login-card .text-button{min-height:44px!important;padding:9px 4px!important;font-size:14px!important}
+  .work-login-help{font-size:14px;line-height:1.5;margin-top:12px}
+  .work-login-grid .work-login-card:not(.primary-card){padding:16px}
+  .work-login-grid .work-login-card:not(.primary-card) h2{font-size:21px}
+  .work-login-grid .work-login-card:not(.primary-card) p{font-size:14px}
+  .sb-test-mini{grid-template-columns:86px 1fr;gap:8px;padding:13px;margin-top:12px;font-size:14px}
+  .work-login-foot{margin-top:12px;padding:12px 14px}
+  .work-login-foot span,.work-login-foot p{font-size:13px!important;white-space:normal}
+
+  /* БАЗОВАЯ МОБИЛЬНАЯ СЕТКА */
+  .view-root,.work-client-role .view-root,.client-mode .view-root{padding:0 12px 30px!important;max-width:100%!important;overflow-x:hidden}
+  .panel,.work-client-console,.v15-client-map,.cj-task-focus,.cj-side-card,.cj-history-card{border-radius:18px}
+  .panel{box-shadow:none}
+  .page-heading,.panel-head,.dossier-top,.work-client-console-head{align-items:flex-start;flex-direction:column}
+  .page-heading h2,.panel-head h2{font-size:24px!important;line-height:1.2}
+  .page-heading p,.panel-head p{font-size:15px!important;line-height:1.5}
+  .panel-actions,.toolbar,.work-client-tools{width:100%}
+  .panel-actions button,.toolbar button,.work-client-tools button{min-height:48px;font-size:15px}
+  .clients-grid,.dashboard-grid,.dashboard-lower,.dossier-grid,.metric-row,.dossier-summary,.work-client-snapshot,.work-intake-grid{grid-template-columns:1fr!important}
+  .client-card{padding:17px;border-radius:18px}
+  .client-card h3{font-size:18px}
+  .client-card p,.client-card-meta span{font-size:14px;line-height:1.5}
+
+  /* КЛИЕНТСКИЙ ПУТЬ: крупно, нативно, одним большим пальцем */
+  .client-journey-v12{width:100%;max-width:none;padding-top:10px}
+  .cj-header{gap:10px;padding:8px 0 13px}
+  .cj-mark{width:42px;height:42px}
+  .cj-brandline strong{font-size:18px}
+  .cj-brandline small{font-size:12px}
+  .cj-person span{font-size:16px}
+  .cj-progress{height:5px}
+  .cj-main{padding:22px 0 12px}
+  .cj-kicker{font-size:13px;margin-bottom:10px}
+  .cj-welcome h2,.cj-stage>h2,.cj-state-center h2,.cj-task-focus h2{font-size:31px!important;line-height:1.12;letter-spacing:-.025em;margin-bottom:14px}
+  .cj-lead,.cj-lead.small{font-size:17px!important;line-height:1.55}
+  .cj-promise-grid{gap:12px;margin:22px 0}
+  .cj-promise-grid article{grid-template-columns:44px 1fr;padding:16px;border-radius:16px}
+  .cj-promise-grid strong{font-size:16px}
+  .cj-promise-grid p{font-size:14px;line-height:1.45}
+  .cj-privacy{padding:14px;border-radius:14px;margin-top:20px}
+  .cj-privacy p{font-size:14px}
+  .cj-back{min-height:44px;font-size:15px;margin-bottom:14px;padding:8px 0}
+  .cj-question-meta>span{font-size:14px}
+  .cj-scenario-list{grid-template-columns:1fr;gap:12px;margin-top:18px}
+  .cj-scenario-card{grid-template-columns:48px 1fr 24px;gap:12px;min-height:88px;padding:16px;border-radius:17px}
+  .cj-scenario-icon{width:48px;height:48px;border-radius:14px;font-size:24px}
+  .cj-scenario-card strong{font-size:17px;line-height:1.3}
+  .cj-scenario-card p{font-size:14px;line-height:1.45;margin-top:5px}
+  .cj-answer-list{gap:12px;margin:18px 0 8px}
+  .cj-answer{grid-template-columns:30px 1fr;gap:11px;min-height:72px;padding:16px;border-radius:17px}
+  .cj-answer>span{font-size:20px}
+  .cj-answer strong{font-size:17px;line-height:1.35}
+  .cj-answer p{font-size:14px;line-height:1.45;margin-top:5px}
+  .cj-reflection-form{grid-template-columns:1fr;gap:12px;margin-top:18px}
+  .cj-reflection-form label,.cj-prep-questions label{padding:15px;border-radius:16px}
+  .cj-reflection-form label span,.cj-prep-questions label span,.cj-task-answer>span{font-size:15px;line-height:1.4}
+  .cj-reflection-form textarea,.cj-task-answer textarea,.cj-prep-v12 textarea,.client-assignment textarea{font-size:16px!important;line-height:1.5;min-height:110px;padding:13px;border-radius:13px}
+  .cj-review-grid{grid-template-columns:1fr;gap:12px;margin-top:18px}
+  .cj-review-card{padding:16px;border-radius:16px}
+  .cj-review-card small{font-size:12px}
+  .cj-review-card strong{font-size:18px}
+  .cj-review-card p{font-size:15px;line-height:1.5}
+  .cj-review-line,.cj-history-line{grid-template-columns:1fr;gap:4px}
+  .cj-review-line span,.cj-history-line span,.cj-review-line strong,.cj-history-line strong{font-size:14px}
+  .cj-send-box{align-items:stretch;flex-direction:column;padding:16px;border-radius:17px}
+  .cj-send-box strong{font-size:17px}
+  .cj-send-box p{font-size:14px}
+  .cj-primary{min-height:56px!important;font-size:17px!important;padding:0 18px!important;border-radius:14px!important}
+  .cj-action-row{gap:10px}
+  .cj-action-row.end,.cj-action-row.between{position:sticky;bottom:0;z-index:15;margin-left:-12px;margin-right:-12px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(5,11,20,0),rgba(5,11,20,.96) 22%);backdrop-filter:blur(10px)}
+  .cj-action-row.end .cj-primary,.cj-action-row.between .cj-primary{width:100%}
+  .cj-action-row>span,.cj-action-row>small{font-size:13px}
+  .cj-nav{width:100%;overflow-x:auto;gap:5px}
+  .cj-nav button{min-height:46px;flex:1;font-size:14px;padding:8px 12px}
+  .cj-task-focus{padding:18px;min-height:auto}
+  .cj-task-prompt{font-size:16px;line-height:1.55}
+  .cj-task-meta{font-size:13px;flex-direction:column}
+  .cj-side-card small{font-size:12px}.cj-side-card strong{font-size:19px}.cj-side-card p{font-size:14px}
+  .cj-state-center{margin:18px auto;padding:26px 16px;border-radius:19px}
+  .cj-state-center>p{font-size:16px}
+  .cj-state-actions{flex-direction:column}.cj-state-actions button{width:100%;min-height:54px}
+  .cj-route-step{padding:14px;border-radius:15px}.cj-route-step small{font-size:11px}.cj-route-step strong{font-size:16px}.cj-route-step p{font-size:14px}
+  .cj-prep-v12,.cj-prep-questions{grid-template-columns:1fr}
+  .cj-checkin-v12{padding:15px;border-radius:16px}.cj-checkin-v12>small{font-size:12px}.cj-checkin-v12>strong{font-size:18px}.cj-checkin-v12 label{grid-template-columns:1fr;gap:7px}.cj-checkin-v12 label>span,.cj-checkin-v12 output{font-size:14px;text-align:left}
+  .cj-footer{padding-top:14px}.cj-footer span{font-size:11px}.cj-footer p{font-size:13px;line-height:1.45}
+
+  /* v15: крупные жизненные ситуации и нативные подсказки */
+  .v15-welcome{padding-top:14px}
+  .v15-welcome-visual{gap:8px;margin:18px 0}.v15-flow-pill{width:100%;padding:14px;font-size:15px}
+  .v15-big-cta{min-height:56px;font-size:17px;padding:0 20px}
+  .v15-life-grid,.v15-answer-grid,.v15-map-grid{grid-template-columns:1fr;gap:12px}
+  .v15-life-card{grid-template-columns:50px 1fr 22px;min-height:88px;padding:16px;border-radius:18px}
+  .v15-life-icon{width:50px;height:50px;font-size:24px}
+  .v15-life-card strong{font-size:17px}.v15-life-card p{font-size:14px;line-height:1.45}
+  .v15-answer{grid-template-columns:42px 1fr 20px;min-height:76px;padding:15px;border-radius:18px}
+  .v15-answer>span{width:42px;height:42px;font-size:20px}.v15-answer strong{font-size:17px}
+  .v15-selected-card{padding:14px;border-radius:16px}.v15-selected-card strong{font-size:17px}.v15-selected-card small{font-size:13px}
+  .v15-phrase-chips,.v15-inline-chips,.v15-psych-chips,.v15-assignment-types{gap:8px}
+  .v15-phrase-chips button,.v15-inline-chips button,.v15-task-helper button,.v15-psych-chips button,.v15-assignment-types button,.v15-route-strip button{min-height:44px;padding:9px 12px;font-size:14px}
+  .v15-compose-box>span{font-size:16px}.v15-compose-box textarea{font-size:16px!important;min-height:110px}
+  .v15-soft-note{padding:14px}.v15-soft-note p{font-size:14px}
+  .v15-client-map{padding:15px;border-radius:19px}.v15-map-card{padding:15px;border-radius:16px}.v15-map-card h3{font-size:18px}.v15-map-card p{font-size:14px}
+  .v15-answer-badges span{font-size:13px;padding:9px 10px}
+  .v15-route-suggestion{padding:13px;border-radius:15px}.v15-route-suggestion strong{font-size:15px}.v15-route-suggestion small{font-size:13px}
+
+  /* ПСИХОЛОГ НА ТЕЛЕФОНЕ: формы и рабочие карточки без микротекста */
+  .work-client-console{padding:16px}.work-client-console-head h2{font-size:22px}
+  .work-client-snapshot article{min-height:auto;padding:14px}.work-client-snapshot small,.work-intake-grid span{font-size:12px}.work-client-snapshot strong{font-size:17px}.work-client-snapshot p,.work-intake-grid p{font-size:14px}
+  .work-inbox-item{grid-template-columns:1fr;gap:9px;padding:14px 0}.work-inbox-type{font-size:12px}.work-inbox-item p,.work-inbox-item small{font-size:14px}
+  .work-inbox-actions{width:100%}.work-inbox-actions button{min-height:48px;font-size:14px}
+  .work-session-body{width:calc(100% - 20px);padding:18px 0 40px}.work-session-title h1{font-size:27px}.work-session-title p{font-size:15px}
+  .work-session-card,.work-live-notes,.work-finish-private,.work-finish-shared{padding:16px;border-radius:17px}.work-session-card small{font-size:12px}.work-session-card h3{font-size:19px}.work-session-card p{font-size:15px}
+  .work-live-notes label,.work-finish-grid label{font-size:13px}.work-live-notes textarea,.work-finish-grid textarea,.work-finish-grid input{font-size:16px!important;min-height:52px;padding:13px}
+  .work-opening button{min-height:48px;font-size:14px;padding:11px}
+  .work-hint-row strong{font-size:15px}.work-hint-row p,.work-hint-row summary{font-size:13px}
+  .work-session-next{position:sticky;bottom:0;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:rgba(6,16,30,.94);z-index:3}.work-session-next button{min-height:52px;font-size:15px}
+  .sb-client-access-bar{padding:14px}.sb-client-access-bar>div:last-child{width:100%}.sb-client-access-bar button{flex:1;min-height:48px;font-size:14px}
+  .sb-preset-grid button{min-height:72px;padding:15px}.sb-preset-grid strong{font-size:16px}.sb-preset-grid small{font-size:13px}
+
+  /* МОДАЛКИ И СЦЕНАРИИ */
+  .modal-dialog,.modal-dialog.medium,.modal-dialog.large,.report-dialog{width:calc(100% - 12px)!important;max-width:none!important;max-height:calc(100vh - 12px);margin:6px!important;padding:20px 14px 16px!important;border-radius:20px!important;overflow-y:auto}
+  .modal-dialog h2{font-size:25px}
+  .form-grid,.session-form{grid-template-columns:1fr!important}.form-grid .full{grid-column:auto!important}
+  .form-grid label span{font-size:14px}.form-grid input,.form-grid select,.form-grid textarea{min-height:52px;font-size:16px!important;padding:12px;border-radius:12px}
+  .form-actions{position:sticky;bottom:0;z-index:4;padding:10px 0 calc(8px + env(safe-area-inset-bottom));background:rgba(8,18,32,.96)}
+  .form-actions button{min-height:52px;font-size:15px}
+  .assessment-shell{display:block!important;min-height:100vh}.assessment-sidebar{display:none!important}.assessment-main{width:100%!important;min-width:0!important}
+  .assessment-header{padding:12px 14px}.assessment-header small{font-size:12px}.assessment-header strong{font-size:16px}.pause-button{min-height:44px;font-size:13px}
+  .assessment-body{padding:18px 14px 110px!important}.assessment-controls{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid!important;grid-template-columns:1fr 1.35fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(6,16,30,.96);border-top:1px solid #1b3044;backdrop-filter:blur(12px)}
+  .assessment-controls button{min-height:54px;font-size:15px}
+}
+
+@media (max-width:420px){
+  .work-login-card h1{font-size:26px}.work-login-card h2{font-size:20px}
+  .cj-welcome h2,.cj-stage>h2,.cj-state-center h2,.cj-task-focus h2{font-size:28px!important}
+  .v15-life-card{grid-template-columns:46px 1fr 18px;padding:14px}.v15-life-icon{width:46px;height:46px}
+  .cj-scenario-card{grid-template-columns:44px 1fr 20px;padding:14px}.cj-scenario-icon{width:44px;height:44px}
+  .assessment-controls{grid-template-columns:1fr 1fr}
+}
+
+@media (pointer:coarse){
+  button,.primary-button,.quiet-button,.danger-button,.text-button{min-height:44px}
+}

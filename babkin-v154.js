@@ -66,7 +66,9 @@
   function transformGate(){
     const gate=document.getElementById('workLoginGate');
     if(!gate||gate.querySelector('.babkin-preview-intro'))return;
-    const shell=gate.querySelector('.work-login-shell');if(!shell)return;
+    /* В workspace.js есть старый локальный экран с ПИН. Не трогаем его во время
+       асинхронного старта Supabase: ждём финальный hosted-auth экран. */
+    const shell=gate.querySelector('.work-login-shell.sb-auth-shell');if(!shell)return;
     document.body.classList.remove('babkin-preview-mode');
 
     const intro=document.createElement('section');

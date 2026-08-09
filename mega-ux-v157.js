@@ -1,108 +1,47 @@
-/* Точка опоры v15.7 — мега-аудит UX: искать ситуацию обычными словами, не выбирать терминологию. */
+/* Точка опоры v15.7-safe — простой UX-слой без рискованных перехватов. */
 (function(){
   'use strict';
+  function E(v){return typeof esc==='function'?esc(v):String(v||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 
-  function ensureUnclearScenario(){
-    if(typeof scenarios!=='undefined'&&scenarios.unclear_request)return;
-    if(document.querySelector('script[data-unclear-request]'))return;
-    const s=document.createElement('script');s.src='unclear-request-v157.js?v=157';s.dataset.unclearRequest='1';
-    s.addEventListener('load',()=>{try{if(typeof ui!=='undefined'&&ui?.view==='assessment'&&typeof renderView==='function')renderView()}catch{}});
-    document.head.appendChild(s);
-  }
-  ensureUnclearScenario();
-
-  const QUICK=[
-    ['stress','Мне тревожно / не могу отключиться'],
-    ['stress','Я вымотан(а), всё на мне'],
-    ['relationships','Мы постоянно ссоримся'],
-    ['relationships','Тяжело после расставания'],
-    ['self','Мне трудно сказать «нет» / боюсь оценки'],
-    ['change','Не понимаю, что делать дальше'],
-    ['career','Проблемы с работой'],
-    ['family','Сложно в семье / с ребёнком'],
-    ['habits','Постоянно откладываю / залипаю в телефоне'],
-    ['change','Вообще не понимаю, с чего начать']
+  var QUICK=[
+    ['stress','Мне тревожно / не могу отключиться'],['stress','Я вымотан(а), всё на мне'],
+    ['relationships','Мы постоянно ссоримся'],['relationships','Тяжело после расставания'],
+    ['self','Мне трудно сказать «нет» / боюсь оценки'],['change','Не понимаю, что делать дальше'],
+    ['career','Проблемы с работой'],['family','Сложно в семье / с ребёнком'],['habits','Постоянно откладываю / залипаю в телефоне']
   ];
-  const PUB=[
-    ['relationships','Сложно в отношениях'],['stress','Тревожно или очень устал(а)'],
-    ['self','Трудно отстоять себя / много самокритики'],['change','Жизнь сильно изменилась / есть потеря'],
-    ['career','Проблемы с работой или карьерой'],['family','Трудно в семье или с ребёнком'],
-    ['habits','Откладываю важное / телефон мешает'],['other','Не знаю, как это назвать']
-  ];
-  const escx=(v='')=>typeof esc==='function'?esc(v):String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-  function openCat(root,cat){
-    const d=root.querySelector(`.sx-category[data-sx-category="${cat}"]`);if(!d)return;
-    root.querySelectorAll('.sx-category').forEach(x=>x.open=x===d);d.scrollIntoView({behavior:'smooth',block:'start'});
-  }
 
   function enhanceScenarioHub(root){
-    if(!root?.querySelector('.sx-hub')||root.querySelector('.mega-scenario-entry'))return;
-    const head=root.querySelector('.sx-head');if(!head)return;
-    const box=document.createElement('section');box.className='mega-scenario-entry';
-    box.innerHTML=`<div class="mega-entry-copy"><strong>Можно не знать название проблемы</strong><p>Выберите фразу, похожую на слова клиента, или введите 2–3 слова. Это только помогает найти рабочий маршрут — не ставит диагноз.</p></div>
-      <div class="mega-quick-phrases">${QUICK.map(([cat,label])=>`<button type="button" data-mega-cat="${cat}">${escx(label)}</button>`).join('')}</div>
-      <label class="mega-scenario-search"><span>Или найдите своими словами</span><div><span>⌕</span><input type="search" placeholder="Например: расставание, начальник, устала, подросток…" autocomplete="off"><button type="button" data-mega-clear hidden>Очистить</button></div></label>
-      <div class="mega-search-state" aria-live="polite"></div>`;
+    if(!root || !root.querySelector('.sx-hub') || root.querySelector('.mega-scenario-entry')) return;
+    var head=root.querySelector('.sx-head'); if(!head) return;
+    var box=document.createElement('section'); box.className='mega-scenario-entry';
+    box.innerHTML='<div class="mega-entry-copy"><strong>Можно не знать название проблемы</strong><p>Выберите близкую формулировку или найдите сценарий обычными словами.</p></div><div class="mega-quick-phrases">'+QUICK.map(function(x){return '<button type="button" data-mega-cat="'+E(x[0])+'">'+E(x[1])+'</button>';}).join('')+'</div><label class="mega-scenario-search"><span>Найти своими словами</span><div><span>⌕</span><input type="search" placeholder="Например: расставание, начальник, устала, подросток…"><button type="button" data-mega-clear hidden>Очистить</button></div></label><div class="mega-search-state" aria-live="polite"></div>';
     head.insertAdjacentElement('afterend',box);
-
-    const safety=document.createElement('details');safety.className='mega-safety-gate';safety.innerHTML=`<summary><span>!</span><span><strong>Сначала безопасность, если ситуация острая</strong><small>Угроза себе или другим, насилие/контроль, выраженная дезорганизация, острая интоксикация или новый тяжёлый физический симптом — не обычный сценарий.</small></span><i>›</i></summary><div><p>${escx(typeof GENERAL_SAFETY!=='undefined'?GENERAL_SAFETY:'При острой кризисной ситуации специалист действует по своему кризисному протоколу и требованиям своей юрисдикции.')}</p><p><b>Принцип:</b> сначала оценка безопасности и подходящий уровень помощи, только затем обычный рабочий маршрут.</p></div>`;
-    box.insertAdjacentElement('afterend',safety);
-
-    box.querySelectorAll('[data-mega-cat]').forEach(b=>b.addEventListener('click',()=>openCat(root,b.dataset.megaCat)));
-    const input=box.querySelector('input'),clear=box.querySelector('[data-mega-clear]'),state=box.querySelector('.mega-search-state');
-    const allCards=[...root.querySelectorAll('.sx-scenario-card')];
-    const filter=()=>{
-      const q=input.value.trim().toLocaleLowerCase('ru');clear.hidden=!q;let shown=0;
-      root.querySelectorAll('.sx-category').forEach(cat=>{
-        let catShown=0;cat.querySelectorAll('.sx-scenario-card').forEach(card=>{
-          const id=card.querySelector('[data-scenario]')?.dataset.scenario||'';
-          const guide=(typeof SCENARIO_GUIDE!=='undefined'&&SCENARIO_GUIDE[id])?`${SCENARIO_GUIDE[id].when||''} ${(SCENARIO_GUIDE[id].opening||[]).join(' ')}`:'';
-          const hay=(card.textContent+' '+guide).toLocaleLowerCase('ru');const ok=!q||hay.includes(q);card.hidden=!ok;if(ok){shown++;catShown++}
-        });
-        cat.hidden=!!q&&!catShown;if(q&&catShown)cat.open=true;
+    box.querySelectorAll('[data-mega-cat]').forEach(function(b){b.onclick=function(){var d=root.querySelector('.sx-category[data-sx-category="'+b.dataset.megaCat+'"]');if(d){root.querySelectorAll('.sx-category').forEach(function(x){x.open=x===d;});d.scrollIntoView({behavior:'smooth',block:'start'});}};});
+    var input=box.querySelector('input'), clear=box.querySelector('[data-mega-clear]'), state=box.querySelector('.mega-search-state');
+    function filter(){
+      var q=input.value.trim().toLowerCase(); clear.hidden=!q; var shown=0;
+      root.querySelectorAll('.sx-category').forEach(function(cat){
+        var n=0;cat.querySelectorAll('.sx-scenario-card').forEach(function(card){var ok=!q||card.textContent.toLowerCase().indexOf(q)!==-1;card.hidden=!ok;if(ok){n++;shown++;}});cat.hidden=!!q&&!n;if(q&&n)cat.open=true;
       });
-      state.textContent=q?(shown?`Найдено: ${shown}`:'Ничего точного не найдено. Попробуйте одно простое слово или выберите близкую область выше.'):' ';
-    };
-    input.addEventListener('input',filter);clear.addEventListener('click',()=>{input.value='';filter();input.focus()});
-
-    allCards.forEach(card=>{
-      const id=card.querySelector('[data-scenario]')?.dataset.scenario;if(!id||typeof SCENARIO_GUIDE==='undefined')return;
-      const g=SCENARIO_GUIDE[id];if(!g?.when||card.querySelector('.mega-when'))return;
-      const det=document.createElement('details');det.className='mega-when';det.innerHTML=`<summary>Когда подходит этот маршрут?</summary><p>${escx(g.when)}</p>`;
-      const action=card.querySelector('.sx-open-scenario,.sx-need-client');if(action)card.insertBefore(det,action);else card.appendChild(det);
-    });
+      state.textContent=q?(shown?'Найдено: '+shown:'Ничего точного не найдено. Попробуйте одно простое слово.'):' ';
+    }
+    input.oninput=filter;clear.onclick=function(){input.value='';filter();input.focus();};
   }
 
-  if(typeof renderAssessmentHub==='function'){
-    const previous=renderAssessmentHub;
-    renderAssessmentHub=function(root){const r=previous.apply(this,arguments);enhanceScenarioHub(root);return r};
+  function enhancePublicForm(){
+    var form=document.querySelector('#publicInquiryForm');if(!form||form.dataset.megaSafe==='1')return;
+    var select=form.querySelector('select[name="topic"]');if(!select)return;form.dataset.megaSafe='1';
+    var label=select.closest('label');if(label)label.classList.add('mega-hidden-topic');
+    var topics=[['relationships','Сложно в отношениях'],['stress','Тревожно или очень устал(а)'],['self','Трудно отстоять себя'],['change','Жизнь сильно изменилась / есть потеря'],['career','Проблемы с работой'],['family','Трудно в семье или с ребёнком'],['habits','Откладываю важное / телефон мешает'],['other','Не знаю, как это назвать']];
+    var fs=document.createElement('fieldset');fs.className='mega-public-topics';fs.innerHTML='<legend>Что сейчас ближе всего?</legend><p>Можно выбрать приблизительно и дальше написать своими словами.</p><div>'+topics.map(function(x){return '<button type="button" data-public-topic="'+E(x[0])+'">'+E(x[1])+'</button>';}).join('')+'</div>';
+    if(label)label.insertAdjacentElement('afterend',fs);
+    fs.querySelectorAll('[data-public-topic]').forEach(function(b){b.onclick=function(){select.value=b.dataset.publicTopic;fs.querySelectorAll('button').forEach(function(x){x.classList.toggle('active',x===b);});};});
   }
 
-  function enhancePublicForm(scope=document){
-    const form=scope.querySelector?.('#publicInquiryForm');if(!form||form.dataset.mega==='1')return;
-    const select=form.querySelector('select[name="topic"]');if(!select)return;form.dataset.mega='1';
-    const label=select.closest('label');label.classList.add('mega-hidden-topic');
-    const chooser=document.createElement('fieldset');chooser.className='mega-public-topics';chooser.innerHTML=`<legend>Что сейчас ближе всего?</legend><p>Не нужно подбирать психологический термин. Выберите приблизительно — дальше напишите своими словами.</p><div>${PUB.map(([value,text])=>`<button type="button" data-public-topic="${value}">${escx(text)}</button>`).join('')}</div>`;
-    label.insertAdjacentElement('afterend',chooser);
-    const selectTopic=value=>{select.value=value;chooser.querySelectorAll('[data-public-topic]').forEach(b=>b.classList.toggle('active',b.dataset.publicTopic===value))};
-    chooser.querySelectorAll('[data-public-topic]').forEach(b=>b.addEventListener('click',()=>selectTopic(b.dataset.publicTopic)));
-    selectTopic(select.value||'other');
-    const ta=form.querySelector('textarea[name="message"]');if(ta){ta.placeholder='Напишите 2–5 предложений. Например: «После расставания постоянно возвращаюсь мыслями к отношениям, плохо сплю и не понимаю, как перестать зацикливаться. Хочу обсудить это с психологом». ';}
-    const consent=form.querySelector('.public-consent');if(consent){const hint=document.createElement('p');hint.className='mega-public-privacy';hint.textContent='Для первого сообщения не нужны диагнозы, паспортные данные, подробная медицинская история или документы.';consent.insertAdjacentElement('beforebegin',hint)}
-  }
+  function scan(){enhanceScenarioHub(document.getElementById('viewRoot'));enhancePublicForm();}
+  var obs=new MutationObserver(scan);obs.observe(document.body,{subtree:true,childList:true});scan();
 
-  const observer=new MutationObserver(()=>{enhancePublicForm(document);const root=document.getElementById('viewRoot');if(root)enhanceScenarioHub(root)});
-  observer.observe(document.body,{subtree:true,childList:true});
-  enhancePublicForm(document);enhanceScenarioHub(document.getElementById('viewRoot'));
-})();
-
-/* Финальный слой рабочего кабинета — ассистент психолога. Загружается после библиотеки сценариев. */
-(function(){
-  if(!document.querySelector('link[data-psych-assistant]')){
-    const l=document.createElement('link');l.rel='stylesheet';l.href='psych-assistant-v158.css?v=158';l.dataset.psychAssistant='1';document.head.appendChild(l);
-  }
-  if(!document.querySelector('script[data-psych-assistant]')){
-    const s=document.createElement('script');s.src='psych-assistant-v158.js?v=158';s.dataset.psychAssistant='1';document.body.appendChild(s);
-  }
+  /* Загружаем только проверенный стабильный ассистент v15.9. */
+  if(!document.querySelector('link[data-psych-assistant-v159]')){var l=document.createElement('link');l.rel='stylesheet';l.href='psych-assistant-v159.css?v=159';l.dataset.psychAssistantV159='1';document.head.appendChild(l);}
+  if(!document.querySelector('script[data-psych-assistant-v159]')){var s=document.createElement('script');s.src='psych-assistant-v159.js?v=159';s.dataset.psychAssistantV159='1';document.body.appendChild(s);}
 })();

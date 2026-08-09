@@ -12,11 +12,8 @@
     return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 
-  function readPref(key,fallback){
-    try{return localStorage.getItem(key)||fallback}catch{return fallback}
-  }
+  function readPref(key,fallback){try{return localStorage.getItem(key)||fallback}catch{return fallback}}
   function savePref(key,value){try{localStorage.setItem(key,value)}catch{}}
-
   function currentTheme(){return document.documentElement.dataset.theme||readPref(PREF_THEME,'dark')}
   function currentSize(){return document.documentElement.dataset.textSize||readPref(PREF_SIZE,'normal')}
 
@@ -24,9 +21,9 @@
     const value=theme==='light'?'light':'dark';
     document.documentElement.dataset.theme=value;
     document.documentElement.style.colorScheme=value;
+    const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=value==='light'?'#f4f7fb':'#06101e';
     savePref(PREF_THEME,value);
     const label=document.getElementById('a11yThemeValue');if(label)label.textContent=value==='light'?'Светлая':'Тёмная';
-    const icon=document.getElementById('a11yThemeIcon');if(icon)icon.textContent=value==='light'?'☀':'☾';
     document.querySelectorAll('[data-theme-choice]').forEach(b=>b.classList.toggle('active',b.dataset.themeChoice===value));
     if(announce)announceA11y(`Тема: ${value==='light'?'светлая':'тёмная'}`);
   }
@@ -48,8 +45,7 @@
 
   function ensureA11yControls(){
     if(document.getElementById('a11yViewControl'))return;
-    const wrap=document.createElement('div');
-    wrap.id='a11yViewControl';wrap.className='a11y-view-control';
+    const wrap=document.createElement('div');wrap.id='a11yViewControl';wrap.className='a11y-view-control';
     wrap.innerHTML=`
       <button type="button" class="a11y-view-toggle" id="a11yViewToggle" aria-expanded="false" aria-controls="a11yViewPanel"><span class="a11y-aa">Aa</span><span>Вид</span></button>
       <section class="a11y-view-panel" id="a11yViewPanel" aria-label="Настройки отображения" hidden>
@@ -82,8 +78,7 @@
     const goal=openGoals[0]||null;
     const openStep=goal?.steps?.find(s=>!s.done)||null;
     const hasSession=!!latest;
-    const today=safeToday();
-    const sessionToday=latest?.date===today;
+    const sessionToday=latest?.date===safeToday();
     const openStage=!hasSession?'before':(sessionToday?'during':'after');
 
     const journey=document.createElement('section');journey.className='client-journey';
@@ -120,11 +115,12 @@
   }
 
   function transformClient(root){
-    if(!root||root.querySelector('.client-journey'))return;
+    if(!root)return;
+    root.classList.add('client-babkin-mode');
+    if(root.querySelector('.client-journey'))return;
     const c=(typeof activeClient==='function')?activeClient():null;if(!c)return;
     const sessions=(typeof clientSessions==='function')?clientSessions(c.id):[];
     const goals=(typeof clientGoals==='function')?clientGoals(c.id):[];
-    root.classList.add('client-babkin-mode');
     const header=root.querySelector('.dossier-header');if(!header)return;
     const journey=makeClientJourney(c,sessions,goals);
     const tabs=root.querySelector('.tabs');const tabRoot=root.querySelector('#clientTabRoot');
@@ -141,16 +137,11 @@
 
   function clearClientMode(){
     const root=document.getElementById('viewRoot');
-    if(root&&(!window.ui||ui.view!=='client'))root.classList.remove('client-babkin-mode');
+    if(root&&typeof ui!=='undefined'&&ui.view!=='client')root.classList.remove('client-babkin-mode');
   }
 
   const previousRenderClient=typeof renderClient==='function'?renderClient:null;
-  if(previousRenderClient){
-    renderClient=function(root){
-      previousRenderClient(root);
-      transformClient(root);
-    };
-  }
+  if(previousRenderClient){renderClient=function(root){previousRenderClient(root);transformClient(root);};}
 
   const previousRenderView=typeof renderView==='function'?renderView:null;
   if(previousRenderView){

@@ -6,16 +6,25 @@
   <meta name="theme-color" content="#06101e" />
   <meta name="description" content="Точка опоры — рабочее пространство психолога и клиента: сессии, сценарии, задания и динамика." />
   <title>Точка опоры — рабочее пространство психолога и клиента</title>
+  <script>
+    /* Recovery 16.6: старые PWA-кэши не должны удерживать сломанные сборки. */
+    (function(){
+      try{
+        if('caches' in window){caches.keys().then(function(keys){return Promise.all(keys.map(function(k){return caches.delete(k);}));}).catch(function(){});}
+        if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(regs){return Promise.all(regs.map(function(r){return r.unregister();}));}).catch(function(){});}
+      }catch(e){}
+    })();
+  </script>
   <script>(function(){try{var t=localStorage.getItem('tochka_theme_v155')||'dark',s=localStorage.getItem('tochka_text_size_v155')||'normal';document.documentElement.dataset.theme=t==='light'?'light':'dark';document.documentElement.dataset.textSize=['normal','large','xlarge'].includes(s)?s:'normal';document.documentElement.style.colorScheme=t==='light'?'light':'dark'}catch(e){}})();</script>
   <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="styles.css?v=153" />
-  <link rel="stylesheet" href="pilot.css?v=153" />
-  <link rel="stylesheet" href="workspace.css?v=153" />
-  <link rel="stylesheet" href="general.css?v=153" />
-  <link rel="stylesheet" href="v15.css?v=153" />
-  <link rel="stylesheet" href="supabase.css?v=153" />
-  <link rel="stylesheet" href="accessibility-v155.css?v=155" />
+  <link rel="stylesheet" href="styles.css?v=166" />
+  <link rel="stylesheet" href="pilot.css?v=166" />
+  <link rel="stylesheet" href="workspace.css?v=166" />
+  <link rel="stylesheet" href="general.css?v=166" />
+  <link rel="stylesheet" href="v15.css?v=166" />
+  <link rel="stylesheet" href="supabase.css?v=166" />
+  <link rel="stylesheet" href="accessibility-v155.css?v=166" />
 </head>
 <body>
   <div class="app-layout">
@@ -159,13 +168,13 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>window.__TOCHKA_SUPABASE_MODE=true;</script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-config.js?v=153"></script>
-  <script src="app.js?v=153"></script>
-  <script src="pilot.js?v=153"></script>
-  <script src="general.js?v=153"></script>
-  <script src="workspace.js?v=153"></script>
-  <script src="v15.js?v=153"></script>
-  <script src="supabase-app.js?v=153"></script>
-  <script src="accessibility-v155.js?v=155"></script>
+  <script src="supabase-config.js?v=166"></script>
+  <script src="app.js?v=166"></script>
+  <script src="pilot.js?v=166"></script>
+  <script src="general.js?v=166"></script>
+  <script src="workspace.js?v=166"></script>
+  <script src="v15.js?v=166"></script>
+  <script src="supabase-app.js?v=166"></script>
+  <script src="accessibility-v155.js?v=166"></script>
 </body>
 </html>

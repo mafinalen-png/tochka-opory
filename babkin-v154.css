@@ -1,101 +1,51 @@
-/* Точка опоры v15.4 — Бабкин-тест: меньше выбора, крупнее смысловые блоки */
+/* Точка опоры v16.1 — Бабкин-тест: крупно, последовательно, без перегруза */
 
 /* ---------- Вход: сначала посмотреть, потом регистрироваться ---------- */
-.babkin-preview-intro{
-  max-width:860px;
-  margin:20px auto 22px;
-  padding:28px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:24px;
-  background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
-  box-shadow:0 18px 60px rgba(0,0,0,.14);
-}
-.babkin-preview-intro .work-login-kicker{display:inline-flex;margin-bottom:10px}
-.babkin-preview-intro h1{font-size:clamp(30px,5vw,50px);line-height:1.04;max-width:760px;margin:0 0 14px}
-.babkin-preview-intro p{font-size:18px;line-height:1.55;max-width:720px;margin:0 0 22px;color:var(--muted,#aeb9c7)}
-.babkin-preview-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.babkin-preview-actions .primary-button{min-height:54px;padding:0 24px;font-size:17px}
-.babkin-login-details{max-width:860px;margin:0 auto 20px;border:1px solid rgba(255,255,255,.1);border-radius:18px;overflow:hidden}
-.babkin-login-details>summary{cursor:pointer;padding:17px 20px;font-weight:750;list-style:none}
-.babkin-login-details>summary::-webkit-details-marker{display:none}
-.babkin-login-details>summary:after{content:'＋';float:right;opacity:.7}
-.babkin-login-details[open]>summary:after{content:'−'}
-.babkin-login-details .primary-card{border:0!important;border-top:1px solid rgba(255,255,255,.08)!important;border-radius:0!important;margin:0!important}
-.work-login-grid.babkin-login-grid{display:block!important;max-width:860px;margin:0 auto}
-.work-login-grid.babkin-login-grid>.work-login-card:not(.primary-card){display:none!important}
-.sb-setup-card.babkin-setup-secondary{max-width:860px;margin:0 auto}
+.babkin-preview-intro{max-width:860px;margin:20px auto 22px;padding:28px;border:1px solid rgba(255,255,255,.12);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.035));box-shadow:0 18px 60px rgba(0,0,0,.14)}
+.babkin-preview-intro .work-login-kicker{display:inline-flex;margin-bottom:10px}.babkin-preview-intro h1{font-size:clamp(30px,5vw,50px);line-height:1.04;max-width:760px;margin:0 0 14px}.babkin-preview-intro p{font-size:18px;line-height:1.55;max-width:720px;margin:0 0 22px;color:var(--muted,#aeb9c7)}
+.babkin-preview-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.babkin-preview-actions .primary-button{min-height:54px;padding:0 24px;font-size:17px}
+.babkin-login-details{max-width:860px;margin:0 auto 20px;border:1px solid rgba(255,255,255,.1);border-radius:18px;overflow:hidden}.babkin-login-details>summary{cursor:pointer;padding:17px 20px;font-weight:750;list-style:none}.babkin-login-details>summary::-webkit-details-marker{display:none}.babkin-login-details>summary:after{content:'＋';float:right;opacity:.7}.babkin-login-details[open]>summary:after{content:'−'}
+.babkin-login-details .primary-card{border:0!important;border-top:1px solid rgba(255,255,255,.08)!important;border-radius:0!important;margin:0!important}.work-login-grid.babkin-login-grid{display:block!important;max-width:860px;margin:0 auto}.work-login-grid.babkin-login-grid>.work-login-card:not(.primary-card){display:none!important}.sb-setup-card.babkin-setup-secondary{max-width:860px;margin:0 auto}
 
-/* ---------- Навигация: 3 крупных этапа вместо 7 равноправных пунктов ---------- */
-.main-nav.babkin-progressive-nav{display:flex!important;flex-direction:column;gap:10px}
-.babkin-nav-group{border:1px solid var(--line,rgba(255,255,255,.09));border-radius:16px;overflow:hidden;background:rgba(255,255,255,.025)}
-.babkin-group-toggle{
-  width:100%;display:grid!important;grid-template-columns:36px 1fr 24px;gap:10px;align-items:center;
-  padding:14px!important;border:0!important;border-radius:0!important;background:transparent!important;text-align:left!important;color:inherit!important
-}
-.babkin-group-number{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.08);font-size:14px;font-weight:800}
-.babkin-group-copy{display:flex;flex-direction:column;gap:2px}
-.babkin-group-copy strong{font-size:14px;line-height:1.2}
-.babkin-group-copy small{font-size:11px;line-height:1.25;opacity:.62;font-weight:500}
-.babkin-group-chevron{font-size:18px;opacity:.55;transition:transform .18s ease}
-.babkin-nav-group.open .babkin-group-chevron{transform:rotate(90deg)}
-.babkin-group-body{display:none;padding:0 8px 8px}
-.babkin-nav-group.open .babkin-group-body{display:flex;flex-direction:column;gap:4px}
-.main-nav.babkin-progressive-nav .babkin-group-body>button[data-view]{min-height:43px;padding:10px 12px!important;margin:0!important;font-size:13px;border-radius:10px!important}
-.main-nav.babkin-progressive-nav .babkin-group-body>button[data-view] .nav-icon{font-size:16px}
-.sidebar>.settings-link{display:none!important}
+/* ---------- Навигация: 3 крупных этапа ---------- */
+.main-nav.babkin-progressive-nav{display:flex!important;flex-direction:column;gap:10px}.babkin-nav-group{border:1px solid var(--line,rgba(255,255,255,.09));border-radius:16px;overflow:hidden;background:rgba(255,255,255,.025)}
+.babkin-group-toggle{width:100%;display:grid!important;grid-template-columns:36px 1fr 24px;gap:10px;align-items:center;padding:14px!important;border:0!important;border-radius:0!important;background:transparent!important;text-align:left!important;color:inherit!important}.babkin-group-number{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.08);font-size:14px;font-weight:800}.babkin-group-copy{display:flex;flex-direction:column;gap:2px}.babkin-group-copy strong{font-size:14px;line-height:1.2}.babkin-group-copy small{font-size:11px;line-height:1.25;opacity:.62;font-weight:500}.babkin-group-chevron{font-size:18px;opacity:.55;transition:transform .18s ease}.babkin-nav-group.open .babkin-group-chevron{transform:rotate(90deg)}
+.babkin-group-body{display:none;padding:0 8px 8px}.babkin-nav-group.open .babkin-group-body{display:flex;flex-direction:column;gap:4px}.main-nav.babkin-progressive-nav .babkin-group-body>button[data-view]{min-height:43px;padding:10px 12px!important;margin:0!important;font-size:13px;border-radius:10px!important}.main-nav.babkin-progressive-nav .babkin-group-body>button[data-view] .nav-icon{font-size:16px}.sidebar>.settings-link{display:none!important}
 
-/* ---------- Верхняя панель: убираем служебный шум ---------- */
-body.work-psych-role .topbar-search,
-body.work-psych-role .topbar-actions>.mode-badge,
-body.work-psych-role #quickAddSession,
-body.work-psych-role .mobile-settings{display:none!important}
-body.work-psych-role .topbar{gap:18px}
-body.work-psych-role .topbar-title h1{font-size:clamp(22px,2.5vw,34px)}
-.babkin-demo-badge{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.07);font-size:12px;font-weight:700;white-space:nowrap}
-.babkin-login-button{white-space:nowrap}
+/* ---------- Верхняя панель: служебный шум убран ---------- */
+body.work-psych-role .topbar-search,body.work-psych-role .topbar-actions>.mode-badge,body.work-psych-role #quickAddSession,body.work-psych-role .mobile-settings,body.work-psych-role #quickAddClient{display:none!important}
+body.work-psych-role .topbar{gap:18px}.body.work-psych-role .topbar-title{min-width:0}body.work-psych-role .topbar-title h1{font-size:clamp(22px,2.5vw,34px)}
+.babkin-demo-badge{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.07);font-size:12px;font-weight:700;white-space:nowrap}.babkin-login-button{white-space:nowrap}
 
-/* ---------- Новый обзор: одно действие за раз ---------- */
-.babkin-dashboard{max-width:1120px;margin:0 auto;display:grid;gap:18px}
-.babkin-start-card{padding:clamp(24px,4vw,42px);border-radius:26px;border:1px solid var(--line,rgba(255,255,255,.09));background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));overflow:hidden}
-.babkin-start-card h2{font-size:clamp(30px,4vw,52px);line-height:1.04;letter-spacing:-.035em;margin:7px 0 14px;max-width:780px}
-.babkin-start-card>p{font-size:18px;line-height:1.55;max-width:720px;margin:0;color:var(--muted,#9caabb)}
-.babkin-main-action{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.babkin-main-action .primary-button{min-height:54px;padding:0 24px;font-size:16px}
-.babkin-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.babkin-flow-step{padding:20px;border:1px solid var(--line,rgba(255,255,255,.09));border-radius:18px;background:var(--panel,rgba(255,255,255,.035))}
-.babkin-flow-step small{display:inline-flex;margin-bottom:11px;font-size:12px;font-weight:800;opacity:.58;text-transform:uppercase;letter-spacing:.08em}
-.babkin-flow-step strong{display:block;font-size:20px;line-height:1.22;margin-bottom:7px}
-.babkin-flow-step p{margin:0;font-size:14px;line-height:1.5;color:var(--muted,#9caabb)}
-.babkin-current-client{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding:22px;border:1px solid var(--line,rgba(255,255,255,.09));border-radius:20px;background:var(--panel,rgba(255,255,255,.035))}
-.babkin-current-client .section-label{margin-bottom:5px}
-.babkin-current-client h3{font-size:22px;margin:0 0 5px}
-.babkin-current-client p{margin:0;color:var(--muted,#9caabb);line-height:1.45;max-width:680px}
-.babkin-current-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
-.babkin-more{border:1px solid var(--line,rgba(255,255,255,.09));border-radius:16px;background:rgba(255,255,255,.02);overflow:hidden}
-.babkin-more summary{cursor:pointer;padding:15px 18px;font-weight:700;list-style:none}
-.babkin-more summary::-webkit-details-marker{display:none}
-.babkin-more summary:after{content:'＋';float:right;opacity:.55}
-.babkin-more[open] summary:after{content:'−'}
-.babkin-more-links{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 14px}
-.babkin-more-links button{min-height:40px}
+/* ---------- Ассистент психолога ---------- */
+.babkin-dashboard{max-width:1080px;margin:0 auto;display:grid;gap:14px}.babkin-assistant-dashboard{padding-bottom:36px}
+.babkin-assistant-hero,.babkin-assistant-card{border:1px solid var(--line,rgba(255,255,255,.09));background:var(--panel,rgba(255,255,255,.035));border-radius:20px}
+.babkin-assistant-hero{padding:26px 28px}.babkin-assistant-hero>div{max-width:780px}.babkin-assistant-hero h2{font-size:clamp(30px,3.4vw,42px);line-height:1.06;letter-spacing:-.035em;margin:7px 0 10px}.babkin-assistant-hero p{margin:0;color:var(--muted,#9caabb);font-size:16px;line-height:1.58;max-width:760px}
+.babkin-assistant-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:14px}.babkin-assistant-card{padding:21px}.babkin-assistant-card h3{margin:7px 0 8px;font-size:24px;line-height:1.2;letter-spacing:-.025em}.babkin-assistant-card>p{margin:0;color:var(--muted,#9caabb);font-size:15px;line-height:1.55}.babkin-assistant-next{background:linear-gradient(145deg,rgba(31,139,219,.09),rgba(111,78,216,.055)),var(--panel,rgba(255,255,255,.035))}.babkin-assistant-next>div:last-child{margin-top:17px}.babkin-assistant-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.babkin-assistant-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.babkin-assistant-heading>div{max-width:760px}.babkin-assistant-heading h3{margin-bottom:5px}.babkin-assistant-heading p{margin:0;color:var(--muted,#9caabb);font-size:14px;line-height:1.5}
+.babkin-assist-routes{display:grid;gap:8px;margin-top:16px}.babkin-assist-route{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:11px;align-items:start;padding:13px;border:1px solid var(--line,rgba(255,255,255,.09));border-radius:14px;background:rgba(255,255,255,.025)}.babkin-assist-route>span{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:rgba(32,137,205,.12);border:1px solid rgba(32,137,205,.22);color:#2380b8;font-weight:900}.babkin-assist-route strong{display:block;font-size:16px;line-height:1.3}.babkin-assist-route p{margin:4px 0 0;color:var(--muted,#9caabb);font-size:13px;line-height:1.45}.babkin-assist-route button{align-self:center}
+.babkin-assist-questions{margin-top:13px;padding:14px 15px;border:1px solid var(--line,rgba(255,255,255,.09));border-radius:14px;background:rgba(255,255,255,.02)}.babkin-assist-questions>strong{display:block;font-size:15px;margin-bottom:8px}.babkin-assist-questions p{margin:5px 0;color:inherit;font-size:14px;line-height:1.45}
+.babkin-assistant-after p+p{margin-top:7px}.babkin-case-analyzer textarea{display:block;width:100%;min-height:92px;margin-top:15px;padding:13px 14px;border:1px solid var(--line2,var(--line));border-radius:13px;background:rgba(255,255,255,.025);color:inherit;font:inherit;font-size:16px;line-height:1.5;resize:vertical}.babkin-case-analyzer .babkin-assistant-actions{margin-top:10px}.babkin-assist-note{color:var(--muted,#9caabb);font-size:13px}.babkin-assist-safety{padding:14px 16px;border:1px solid rgba(202,79,87,.4);border-left:4px solid #ca4f57;border-radius:14px;background:rgba(202,79,87,.06)}.babkin-assist-safety strong{display:block;font-size:15px}.babkin-assist-safety p{margin:5px 0 0;color:var(--muted,#9caabb);font-size:13px;line-height:1.5}
 
-/* Не показываем одновременно мини-карточку активного клиента и новый крупный фокус */
-body.work-psych-role .active-client-mini{display:none!important}
-body.work-psych-role .privacy-card{margin-top:auto}
+/* ---------- Инструменты второго уровня ---------- */
+.babkin-more{border:1px solid var(--line,rgba(255,255,255,.09));border-radius:16px;background:rgba(255,255,255,.02);overflow:hidden}.babkin-more summary{cursor:pointer;padding:15px 18px;font-weight:700;list-style:none}.babkin-more summary::-webkit-details-marker{display:none}.babkin-more summary:after{content:'＋';float:right;opacity:.55}.babkin-more[open] summary:after{content:'−'}.babkin-more-links{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 14px}.babkin-more-links button{min-height:40px}
+body.work-psych-role .active-client-mini{display:none!important}body.work-psych-role .privacy-card{margin-top:auto}
 
-@media (max-width:900px){
-  .babkin-flow{grid-template-columns:1fr}
-  .babkin-current-client{grid-template-columns:1fr}
-  .babkin-current-actions{justify-content:flex-start}
-}
-@media (max-width:680px){
-  .babkin-preview-intro{margin:10px 12px 14px;padding:22px 18px;border-radius:20px}
-  .babkin-login-details,.sb-setup-card.babkin-setup-secondary{margin-left:12px;margin-right:12px}
-  .babkin-preview-intro h1{font-size:34px}
-  .babkin-preview-intro p,.babkin-start-card>p{font-size:16px}
-  .babkin-start-card{border-radius:20px}
-  .babkin-main-action,.babkin-current-actions{display:grid;grid-template-columns:1fr}
-  .babkin-main-action button,.babkin-current-actions button{width:100%}
-  body.work-psych-role #quickAddClient{display:none!important}
+/* Светлая тема: контраст без бледного текста */
+html[data-theme="light"] .babkin-assistant-hero,html[data-theme="light"] .babkin-assistant-card,html[data-theme="light"] .babkin-more{background:#fff!important;border-color:#cfdbe8!important;color:#172331!important}
+html[data-theme="light"] .babkin-assistant-next{background:linear-gradient(145deg,rgba(31,139,219,.07),rgba(111,78,216,.035)),#fff!important}
+html[data-theme="light"] .babkin-assistant-hero p,html[data-theme="light"] .babkin-assistant-card>p,html[data-theme="light"] .babkin-assistant-heading p,html[data-theme="light"] .babkin-assist-route p{color:#435468!important}
+html[data-theme="light"] .babkin-assist-route,html[data-theme="light"] .babkin-assist-questions{background:#f5f8fb!important;border-color:#d2deea!important}
+html[data-theme="light"] .babkin-case-analyzer textarea{background:#f7f9fc!important;border-color:#c4d2df!important;color:#172331!important}
+
+/* Режим увеличения */
+html[data-text-size="large"] .babkin-assistant-hero p,html[data-text-size="large"] .babkin-assistant-card>p,html[data-text-size="large"] .babkin-assist-route p{font-size:17px}
+html[data-text-size="xlarge"] .babkin-assistant-hero p,html[data-text-size="xlarge"] .babkin-assistant-card>p,html[data-text-size="xlarge"] .babkin-assist-route p{font-size:19px}
+html[data-text-size="large"] .babkin-assist-route strong{font-size:18px}html[data-text-size="xlarge"] .babkin-assist-route strong{font-size:20px}
+
+@media(max-width:900px){.babkin-assistant-grid{grid-template-columns:1fr}.babkin-assistant-heading{display:grid}.babkin-assistant-heading>button{justify-self:start}.babkin-assist-route{grid-template-columns:38px 1fr}.babkin-assist-route>button{grid-column:1/-1;width:100%}}
+@media(max-width:680px){
+  .babkin-preview-intro{margin:10px 12px 14px;padding:22px 18px;border-radius:20px}.babkin-login-details,.sb-setup-card.babkin-setup-secondary{margin-left:12px;margin-right:12px}.babkin-preview-intro h1{font-size:34px}.babkin-preview-intro p{font-size:16px}
+  .babkin-dashboard{gap:10px}.babkin-assistant-hero,.babkin-assistant-card{padding:17px 15px;border-radius:17px}.babkin-assistant-hero h2{font-size:30px}.babkin-assistant-hero p{font-size:15px}.babkin-assistant-card h3{font-size:21px}.babkin-assistant-actions{display:grid;grid-template-columns:1fr}.babkin-assistant-actions button{width:100%}.babkin-assist-route{padding:12px}.babkin-case-analyzer textarea{min-height:108px}.babkin-more-links{display:grid;grid-template-columns:1fr}.babkin-more-links button{width:100%}
   .babkin-demo-badge{display:none}
 }

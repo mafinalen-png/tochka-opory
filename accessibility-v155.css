@@ -1,0 +1,191 @@
+/* Точка опоры v15.5 — темы, крупная типографика, слабовидящий режим */
+:root{
+  --ui-bg:#050b14;--ui-bg-2:#07111f;--ui-surface:#0a1728;--ui-surface-2:#0c1c31;--ui-surface-3:#08182b;
+  --ui-line:#1d3553;--ui-line-strong:#294a72;--ui-text:#eef4fb;--ui-muted:#8fa3bd;--ui-muted-2:#6f86a4;
+  --ui-control:#09172a;--ui-hover:#0d2037;--ui-accent:#1596ff;--ui-accent-2:#7150e8;--ui-shadow:0 22px 60px rgba(0,0,0,.25);
+}
+html[data-theme="light"]{
+  --bg:#f4f7fb;--bg2:#edf3f9;--panel:#ffffff;--panel2:#f7f9fc;--line:#d9e2ee;--line2:#c4d2e2;
+  --text:#172331;--muted:#5f6f82;--muted2:#7c8998;--blue:#1677d2;--blue2:#2c8ee4;--violet:#7056d8;
+  --ui-bg:#f4f7fb;--ui-bg-2:#edf3f9;--ui-surface:#ffffff;--ui-surface-2:#f7f9fc;--ui-surface-3:#f1f5f9;
+  --ui-line:#d9e2ee;--ui-line-strong:#c4d2e2;--ui-text:#172331;--ui-muted:#5f6f82;--ui-muted-2:#7c8998;
+  --ui-control:#f7f9fc;--ui-hover:#edf4fb;--ui-accent:#1677d2;--ui-accent-2:#7056d8;--ui-shadow:0 16px 45px rgba(43,67,93,.11);
+}
+
+html,body{background:var(--ui-bg);color:var(--ui-text)}
+body{transition:background .18s ease,color .18s ease}
+
+/* Светлая тема перекрывает старые жёстко заданные тёмные поверхности */
+html[data-theme="light"] body{background:radial-gradient(circle at 83% 0,rgba(58,127,197,.08),transparent 32%),var(--ui-bg)!important;color:var(--ui-text)!important}
+html[data-theme="light"] .sidebar{background:linear-gradient(180deg,#fff,#f4f7fb 72%)!important;border-color:var(--ui-line)!important}
+html[data-theme="light"] .topbar{background:rgba(255,255,255,.92)!important;border-color:var(--ui-line)!important}
+html[data-theme="light"] .panel,
+html[data-theme="light"] .client-card,
+html[data-theme="light"] .metric-card,
+html[data-theme="light"] .today-item,
+html[data-theme="light"] .task-item,
+html[data-theme="light"] .summary-box,
+html[data-theme="light"] .session-card,
+html[data-theme="light"] .goal-card,
+html[data-theme="light"] .assessment-card,
+html[data-theme="light"] .privacy-card,
+html[data-theme="light"] .active-client-mini,
+html[data-theme="light"] .work-login-card,
+html[data-theme="light"] .sb-setup-card,
+html[data-theme="light"] .babkin-flow-step,
+html[data-theme="light"] .babkin-current-client,
+html[data-theme="light"] .babkin-start-card,
+html[data-theme="light"] .babkin-more,
+html[data-theme="light"] .babkin-nav-group,
+html[data-theme="light"] .babkin-preview-intro,
+html[data-theme="light"] .babkin-login-details{
+  background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-text)!important;box-shadow:var(--ui-shadow)!important
+}
+html[data-theme="light"] .quiet-button,
+html[data-theme="light"] .icon-button,
+html[data-theme="light"] .filter-input,
+html[data-theme="light"] .filter-select,
+html[data-theme="light"] .tabs button,
+html[data-theme="light"] .main-nav button,
+html[data-theme="light"] .settings-link,
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea{
+  background:var(--ui-control)!important;color:var(--ui-text)!important;border-color:var(--ui-line-strong)!important
+}
+html[data-theme="light"] .main-nav button:hover,
+html[data-theme="light"] .settings-link:hover,
+html[data-theme="light"] .tabs button:hover{background:var(--ui-hover)!important;color:var(--ui-text)!important}
+html[data-theme="light"] .main-nav button.active,
+html[data-theme="light"] .tabs button.active{background:#e9f3fc!important;color:#124e82!important;border-color:#9fc7e9!important}
+html[data-theme="light"] .client-table td,
+html[data-theme="light"] .field-block,
+html[data-theme="light"] .client-card-meta{border-color:var(--ui-line)!important;color:var(--ui-text)!important}
+html[data-theme="light"] .client-table td,
+html[data-theme="light"] .field-block p,
+html[data-theme="light"] .session-card p,
+html[data-theme="light"] .goal-card p{color:var(--ui-text)!important}
+html[data-theme="light"] .section-label,
+html[data-theme="light"] .text-button{color:#276ca7!important}
+html[data-theme="light"] .work-login-gate{background:linear-gradient(145deg,#edf4fb,#f8fafc)!important}
+html[data-theme="light"] .assessment-shell,
+html[data-theme="light"] .assessment-main,
+html[data-theme="light"] .assessment-body,
+html[data-theme="light"] .assessment-sidebar{background:var(--ui-surface)!important;color:var(--ui-text)!important;border-color:var(--ui-line)!important}
+html[data-theme="light"] ::placeholder{color:#8997a7!important}
+
+/* Один маленький вход в настройки вида, без лишнего шума */
+.a11y-view-control{position:fixed;top:12px;right:12px;z-index:10050;font-family:Inter,Arial,"Segoe UI",sans-serif}
+.a11y-view-toggle{min-height:44px;padding:0 14px;border:1px solid var(--ui-line-strong);border-radius:12px;background:var(--ui-surface);color:var(--ui-text);box-shadow:0 8px 26px rgba(0,0,0,.12);display:flex;align-items:center;gap:8px;font-weight:800}
+.a11y-view-toggle:hover{background:var(--ui-hover)}
+.a11y-aa{font-size:17px;letter-spacing:-.06em}
+.a11y-view-panel{position:absolute;right:0;top:52px;width:min(360px,calc(100vw - 24px));padding:16px;border:1px solid var(--ui-line);border-radius:18px;background:var(--ui-surface);box-shadow:0 20px 60px rgba(0,0,0,.22);color:var(--ui-text)}
+.a11y-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.a11y-panel-head strong{font-size:17px}
+.a11y-panel-head button{width:36px;height:36px;border:1px solid var(--ui-line);border-radius:10px;background:var(--ui-control);color:var(--ui-text);font-size:22px}
+.a11y-setting-row{padding:13px 0;border-top:1px solid var(--ui-line);display:grid;gap:10px}
+.a11y-setting-row>div:first-child{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.a11y-setting-row small{color:var(--ui-muted);font-size:12px}.a11y-setting-row strong{font-size:13px}
+.a11y-segment{display:grid;grid-template-columns:1fr 1fr;gap:7px}.a11y-segment.three{grid-template-columns:repeat(3,1fr)}
+.a11y-segment button{min-height:44px;border:1px solid var(--ui-line-strong);border-radius:10px;background:var(--ui-control);color:var(--ui-text);font-weight:750}
+.a11y-segment button.active{border-color:#4b9ddb;background:rgba(37,139,219,.13);box-shadow:inset 0 0 0 1px rgba(37,139,219,.2)}
+.a11y-hint{margin:8px 0 0;color:var(--ui-muted);font-size:12px;line-height:1.5}
+.a11y-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+
+/* Базовая типографика стала крупнее даже в обычном режиме */
+body{font-size:16px;line-height:1.5}
+.section-label{font-size:11px!important;letter-spacing:.1em!important}
+.main-nav.babkin-progressive-nav .babkin-group-copy strong{font-size:15px!important}
+.main-nav.babkin-progressive-nav .babkin-group-copy small{font-size:12px!important;line-height:1.35!important}
+.main-nav.babkin-progressive-nav .babkin-group-body>button[data-view]{font-size:14px!important;min-height:46px!important}
+.topbar-title small{font-size:11px!important}.topbar-title h1{font-size:clamp(24px,2.6vw,36px)!important}
+.primary-button,.quiet-button,.danger-button{font-size:14px!important;min-height:46px!important}
+.text-button{font-size:13px!important}
+.panel-head h2{font-size:24px!important}.panel-head p{font-size:14px!important;line-height:1.6!important}
+.page-heading h2{font-size:30px!important}.page-heading p{font-size:14px!important;line-height:1.55!important}
+.client-card h3{font-size:16px!important}.client-card p{font-size:13px!important}.client-card-meta span{font-size:12px!important}
+.dossier-person h2{font-size:28px!important}.dossier-person p{font-size:13px!important}
+.summary-box small{font-size:10px!important}.summary-box strong{font-size:14px!important}
+.tabs button{font-size:13px!important;min-height:44px!important}
+.field-block small{font-size:10px!important}.field-block p{font-size:14px!important;line-height:1.7!important}
+.empty-state p{font-size:13px!important}.session-card p,.goal-card p{font-size:13px!important}
+
+/* Крупный и очень крупный режим: увеличиваются не только буквы, но и зоны нажатия */
+html[data-text-size="large"] body{font-size:18px}
+html[data-text-size="xlarge"] body{font-size:20px}
+html[data-text-size="large"] .view-root{max-width:1420px}
+html[data-text-size="xlarge"] .view-root{max-width:1320px}
+html[data-text-size="large"] .primary-button,
+html[data-text-size="large"] .quiet-button,
+html[data-text-size="large"] .danger-button,
+html[data-text-size="large"] input,
+html[data-text-size="large"] select,
+html[data-text-size="large"] textarea{font-size:16px!important;min-height:50px!important}
+html[data-text-size="xlarge"] .primary-button,
+html[data-text-size="xlarge"] .quiet-button,
+html[data-text-size="xlarge"] .danger-button,
+html[data-text-size="xlarge"] input,
+html[data-text-size="xlarge"] select,
+html[data-text-size="xlarge"] textarea{font-size:18px!important;min-height:54px!important}
+html[data-text-size="large"] .section-label{font-size:12px!important}
+html[data-text-size="xlarge"] .section-label{font-size:13px!important}
+html[data-text-size="large"] p,html[data-text-size="large"] li,html[data-text-size="large"] label{font-size:max(15px,1em)}
+html[data-text-size="xlarge"] p,html[data-text-size="xlarge"] li,html[data-text-size="xlarge"] label{font-size:max(17px,1em)}
+html[data-text-size="large"] .main-nav.babkin-progressive-nav .babkin-group-copy strong{font-size:17px!important}
+html[data-text-size="xlarge"] .main-nav.babkin-progressive-nav .babkin-group-copy strong{font-size:19px!important}
+html[data-text-size="large"] .main-nav.babkin-progressive-nav .babkin-group-copy small{font-size:13px!important}
+html[data-text-size="xlarge"] .main-nav.babkin-progressive-nav .babkin-group-copy small{font-size:15px!important}
+html[data-text-size="large"] .main-nav.babkin-progressive-nav .babkin-group-body>button[data-view]{font-size:16px!important;min-height:50px!important}
+html[data-text-size="xlarge"] .main-nav.babkin-progressive-nav .babkin-group-body>button[data-view]{font-size:18px!important;min-height:56px!important}
+html[data-text-size="large"] .topbar-title h1{font-size:38px!important}
+html[data-text-size="xlarge"] .topbar-title h1{font-size:42px!important}
+
+/* Карточка клиента: вместо пяти вкладок — последовательные этапы */
+.client-babkin-mode{max-width:1180px!important}
+.client-babkin-mode .dossier-header{padding:20px 22px!important;margin-bottom:14px!important}
+.client-babkin-mode .dossier-header .panel-actions,
+.client-babkin-mode .dossier-summary{display:none!important}
+.client-journey{display:grid;gap:14px;margin-bottom:14px}
+.client-journey-intro{padding:24px 26px;border:1px solid var(--ui-line);border-radius:20px;background:var(--ui-surface);box-shadow:var(--ui-shadow)}
+.client-journey-intro h2{font-size:clamp(28px,3.4vw,42px);line-height:1.08;letter-spacing:-.035em;margin:6px 0 9px;max-width:760px}
+.client-journey-intro p{font-size:16px;line-height:1.6;color:var(--ui-muted);margin:0;max-width:760px}
+.client-stage-list{display:grid;gap:10px}
+.client-stage{border:1px solid var(--ui-line);border-radius:18px;background:var(--ui-surface);overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.06)}
+.client-stage>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:48px 1fr 28px;gap:13px;align-items:center;padding:17px 18px;min-height:78px}
+.client-stage>summary::-webkit-details-marker{display:none}
+.client-stage>summary:hover{background:var(--ui-hover)}
+.client-stage-number{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(21,150,255,.15),rgba(113,80,232,.14));border:1px solid rgba(57,133,202,.27);font-weight:850;font-size:18px}
+.client-stage summary strong{display:block;font-size:20px;line-height:1.2}
+.client-stage summary small{display:block;color:var(--ui-muted);font-size:13px;line-height:1.45;margin-top:4px}
+.client-stage-arrow{font-size:26px;color:var(--ui-muted);transition:transform .18s ease}.client-stage[open] .client-stage-arrow{transform:rotate(90deg)}
+.client-stage-body{padding:0 18px 18px 79px;display:grid;gap:10px}
+.client-stage-primary,.client-stage-note,.client-stage-empty{padding:16px 17px;border:1px solid var(--ui-line);border-radius:14px;background:var(--ui-surface-3)}
+.client-stage-primary small,.client-stage-note small{display:block;color:var(--ui-muted-2);font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+.client-stage-primary p,.client-stage-note p,.client-stage-empty p{font-size:15px;line-height:1.65;margin:7px 0 0;color:var(--ui-text)}
+.client-stage-muted{color:var(--ui-muted)!important}
+.client-stage-empty strong{font-size:16px}.client-stage-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:2px}
+.client-tools-details{border:1px solid var(--ui-line);border-radius:17px;background:var(--ui-surface);overflow:hidden;margin-bottom:18px}
+.client-tools-details>summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.client-tools-details>summary::-webkit-details-marker{display:none}
+.client-tools-details>summary span:first-child{display:flex;flex-direction:column;gap:3px}
+.client-tools-details>summary strong{font-size:16px}.client-tools-details>summary small{font-size:12px;color:var(--ui-muted)}
+.client-tools-details[open]>summary>span:last-child{transform:rotate(45deg)}
+.client-tools-body{padding:0 14px 14px}.client-tools-body>.tabs{margin-top:4px}
+.client-tools-body>.sb-client-access-bar{margin:0 0 12px!important}
+
+/* Улучшенная клавиатурная и визуальная доступность */
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #2f9be8!important;outline-offset:3px!important}
+button,summary{touch-action:manipulation}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+@media (max-width:900px){
+  .a11y-view-control{top:auto;bottom:12px;right:12px}.a11y-view-panel{top:auto;bottom:52px}
+  .client-stage-body{padding-left:18px}
+}
+@media (max-width:680px){
+  .client-journey-intro{padding:20px 18px}.client-journey-intro h2{font-size:31px}.client-journey-intro p{font-size:15px}
+  .client-stage>summary{grid-template-columns:42px 1fr 22px;padding:15px 14px}.client-stage-number{width:40px;height:40px}
+  .client-stage summary strong{font-size:18px}.client-stage summary small{font-size:12px}.client-stage-body{padding:0 14px 14px}
+  .client-stage-actions{display:grid;grid-template-columns:1fr}.client-stage-actions button{width:100%}
+  .a11y-view-toggle{min-width:78px}
+}

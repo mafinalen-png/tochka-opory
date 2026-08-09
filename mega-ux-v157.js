@@ -96,3 +96,13 @@
   observer.observe(document.body,{subtree:true,childList:true});
   enhancePublicForm(document);enhanceScenarioHub(document.getElementById('viewRoot'));
 })();
+
+/* Финальный слой рабочего кабинета — ассистент психолога. Загружается после библиотеки сценариев. */
+(function(){
+  if(!document.querySelector('link[data-psych-assistant]')){
+    const l=document.createElement('link');l.rel='stylesheet';l.href='psych-assistant-v158.css?v=158';l.dataset.psychAssistant='1';document.head.appendChild(l);
+  }
+  if(!document.querySelector('script[data-psych-assistant]')){
+    const s=document.createElement('script');s.src='psych-assistant-v158.js?v=158';s.dataset.psychAssistant='1';document.body.appendChild(s);
+  }
+})();

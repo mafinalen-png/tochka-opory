@@ -1,0 +1,24 @@
+/* Точка опоры v15.5 — последовательные формы */
+.form-grid[data-progressive="1"]{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+.progressive-form-step{grid-column:1/-1;border:1px solid var(--ui-line,var(--line));border-radius:16px;background:var(--ui-surface,#0a1728);overflow:hidden}
+.progressive-form-step>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:42px 1fr 24px;gap:12px;align-items:center;min-height:70px;padding:13px 15px;color:var(--ui-text,var(--text))}
+.progressive-form-step>summary::-webkit-details-marker{display:none}
+.progressive-form-step>summary:hover{background:var(--ui-hover,#0d2037)}
+.progressive-form-number{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:850;font-size:16px;background:linear-gradient(145deg,rgba(21,150,255,.16),rgba(113,80,232,.14));border:1px solid rgba(57,133,202,.27)}
+.progressive-form-step summary strong{display:block;font-size:16px;line-height:1.25}
+.progressive-form-step summary small{display:block;margin-top:3px;color:var(--ui-muted,var(--muted));font-size:12px;line-height:1.4}
+.progressive-form-arrow{font-size:24px;color:var(--ui-muted,var(--muted));transition:transform .18s ease}.progressive-form-step[open] .progressive-form-arrow{transform:rotate(90deg)}
+.progressive-form-body{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;padding:4px 15px 16px 69px;border-top:1px solid var(--ui-line,var(--line))}
+.progressive-form-body>label{min-width:0}.progressive-form-body>label.full{grid-column:1/-1}
+.progressive-form-body label>span{font-size:13px!important;line-height:1.35!important;margin-bottom:7px!important}
+.progressive-form-body input,.progressive-form-body select,.progressive-form-body textarea{font-size:15px!important}
+.form-grid[data-progressive="1"]>.form-actions{grid-column:1/-1;margin-top:4px;padding-top:8px}
+html[data-text-size="large"] .progressive-form-step summary strong{font-size:18px}
+html[data-text-size="large"] .progressive-form-step summary small{font-size:14px}
+html[data-text-size="xlarge"] .progressive-form-step summary strong{font-size:20px}
+html[data-text-size="xlarge"] .progressive-form-step summary small{font-size:16px}
+html[data-text-size="large"] .progressive-form-body label>span{font-size:15px!important}
+html[data-text-size="xlarge"] .progressive-form-body label>span{font-size:17px!important}
+html[data-theme="light"] .progressive-form-step{background:var(--ui-surface)!important;border-color:var(--ui-line)!important}
+html[data-theme="light"] .progressive-form-body{border-color:var(--ui-line)!important}
+@media(max-width:720px){.progressive-form-body{grid-template-columns:1fr;padding:4px 13px 14px}.progressive-form-step>summary{grid-template-columns:38px 1fr 20px;padding:12px}.progressive-form-number{width:36px;height:36px}}

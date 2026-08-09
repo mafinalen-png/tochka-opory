@@ -11,7 +11,8 @@
     ['change','Не понимаю, что делать дальше'],
     ['career','Проблемы с работой'],
     ['family','Сложно в семье / с ребёнком'],
-    ['habits','Постоянно откладываю / залипаю в телефоне']
+    ['habits','Постоянно откладываю / залипаю в телефоне'],
+    ['change','Вообще не понимаю, с чего начать']
   ];
   const PUB=[
     ['relationships','Сложно в отношениях'],['stress','Тревожно или очень устал(а)'],
@@ -19,7 +20,7 @@
     ['career','Проблемы с работой или карьерой'],['family','Трудно в семье или с ребёнком'],
     ['habits','Откладываю важное / телефон мешает'],['other','Не знаю, как это назвать']
   ];
-  const escx=(v='')=>typeof esc==='function'?esc(v):String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const escx=(v='')=>typeof esc==='function'?esc(v):String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
 
   function openCat(root,cat){
     const d=root.querySelector(`.sx-category[data-sx-category="${cat}"]`);if(!d)return;
@@ -35,6 +36,10 @@
       <label class="mega-scenario-search"><span>Или найдите своими словами</span><div><span>⌕</span><input type="search" placeholder="Например: расставание, начальник, устала, подросток…" autocomplete="off"><button type="button" data-mega-clear hidden>Очистить</button></div></label>
       <div class="mega-search-state" aria-live="polite"></div>`;
     head.insertAdjacentElement('afterend',box);
+
+    const safety=document.createElement('details');safety.className='mega-safety-gate';safety.innerHTML=`<summary><span>!</span><span><strong>Сначала безопасность, если ситуация острая</strong><small>Угроза себе или другим, насилие/контроль, выраженная дезорганизация, острая интоксикация или новый тяжёлый физический симптом — не обычный сценарий.</small></span><i>›</i></summary><div><p>${escx(typeof GENERAL_SAFETY!=='undefined'?GENERAL_SAFETY:'При острой кризисной ситуации специалист действует по своему кризисному протоколу и требованиям своей юрисдикции.')}</p><p><b>Принцип:</b> сначала оценка безопасности и подходящий уровень помощи, только затем обычный рабочий маршрут.</p></div>`;
+    box.insertAdjacentElement('afterend',safety);
+
     box.querySelectorAll('[data-mega-cat]').forEach(b=>b.addEventListener('click',()=>openCat(root,b.dataset.megaCat)));
     const input=box.querySelector('input'),clear=box.querySelector('[data-mega-clear]'),state=box.querySelector('.mega-search-state');
     const allCards=[...root.querySelectorAll('.sx-scenario-card')];
@@ -52,7 +57,6 @@
     };
     input.addEventListener('input',filter);clear.addEventListener('click',()=>{input.value='';filter();input.focus()});
 
-    /* Профессиональное пояснение скрываем внутрь каждой карточки, а не показываем ещё одним слоем сразу. */
     allCards.forEach(card=>{
       const id=card.querySelector('[data-scenario]')?.dataset.scenario;if(!id||typeof SCENARIO_GUIDE==='undefined')return;
       const g=SCENARIO_GUIDE[id];if(!g?.when||card.querySelector('.mega-when'))return;

@@ -19,6 +19,39 @@ html[data-text-size="xlarge"] .progressive-form-step summary strong{font-size:20
 html[data-text-size="xlarge"] .progressive-form-step summary small{font-size:16px}
 html[data-text-size="large"] .progressive-form-body label>span{font-size:15px!important}
 html[data-text-size="xlarge"] .progressive-form-body label>span{font-size:17px!important}
-html[data-theme="light"] .progressive-form-step{background:var(--ui-surface)!important;border-color:var(--ui-line)!important}
-html[data-theme="light"] .progressive-form-body{border-color:var(--ui-line)!important}
+
+/* Завершаем светлую тему: модальные окна, диагностика и вторичные карточки */
+html[data-theme="light"] .progressive-form-step,
+html[data-theme="light"] .modal-dialog:not(.report-dialog),
+html[data-theme="light"] .scenario-tile,
+html[data-theme="light"] .answer-button,
+html[data-theme="light"] .assessment-result-hero,
+html[data-theme="light"] .assessment-result-card,
+html[data-theme="light"] .chart-wrap,
+html[data-theme="light"] .template-card,
+html[data-theme="light"] .settings-card,
+html[data-theme="light"] .assessment-note,
+html[data-theme="light"] .client-selector select,
+html[data-theme="light"] .meta-chip,
+html[data-theme="light"] .pause-button{
+  background:var(--ui-surface)!important;color:var(--ui-text)!important;border-color:var(--ui-line)!important
+}
+html[data-theme="light"] .progressive-form-body,
+html[data-theme="light"] .assessment-header,
+html[data-theme="light"] .assessment-controls{border-color:var(--ui-line)!important}
+html[data-theme="light"] .assessment-controls{background:var(--ui-surface-2)!important}
+html[data-theme="light"] .modal-close{background:var(--ui-control)!important;color:var(--ui-text)!important;border-color:var(--ui-line-strong)!important}
+html[data-theme="light"] .modal-backdrop{background:rgba(38,55,72,.32)!important}
+html[data-theme="light"] .scenario-tile p,
+html[data-theme="light"] .assessment-content>p,
+html[data-theme="light"] .assessment-result-hero p,
+html[data-theme="light"] .assessment-result-card p,
+html[data-theme="light"] .template-card p,
+html[data-theme="light"] .settings-card p{color:var(--ui-muted)!important}
+html[data-theme="light"] .scenario-tile strong,
+html[data-theme="light"] .assessment-result-card strong,
+html[data-theme="light"] .template-card h3,
+html[data-theme="light"] .settings-card h3{color:var(--ui-text)!important}
+html[data-theme="light"] .toast{background:#fff!important;color:#172331!important;border-color:#c4d2e2!important;box-shadow:0 12px 36px rgba(43,67,93,.18)!important}
+
 @media(max-width:720px){.progressive-form-body{grid-template-columns:1fr;padding:4px 13px 14px}.progressive-form-step>summary{grid-template-columns:38px 1fr 20px;padding:12px}.progressive-form-number{width:36px;height:36px}}

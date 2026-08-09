@@ -2,6 +2,15 @@
 (function(){
   'use strict';
 
+  function ensureUnclearScenario(){
+    if(typeof scenarios!=='undefined'&&scenarios.unclear_request)return;
+    if(document.querySelector('script[data-unclear-request]'))return;
+    const s=document.createElement('script');s.src='unclear-request-v157.js?v=157';s.dataset.unclearRequest='1';
+    s.addEventListener('load',()=>{try{if(typeof ui!=='undefined'&&ui?.view==='assessment'&&typeof renderView==='function')renderView()}catch{}});
+    document.head.appendChild(s);
+  }
+  ensureUnclearScenario();
+
   const QUICK=[
     ['stress','Мне тревожно / не могу отключиться'],
     ['stress','Я вымотан(а), всё на мне'],
@@ -20,7 +29,7 @@
     ['career','Проблемы с работой или карьерой'],['family','Трудно в семье или с ребёнком'],
     ['habits','Откладываю важное / телефон мешает'],['other','Не знаю, как это назвать']
   ];
-  const escx=(v='')=>typeof esc==='function'?esc(v):String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
+  const escx=(v='')=>typeof esc==='function'?esc(v):String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
   function openCat(root,cat){
     const d=root.querySelector(`.sx-category[data-sx-category="${cat}"]`);if(!d)return;

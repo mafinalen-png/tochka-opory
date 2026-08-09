@@ -1,15 +1,10 @@
-const CACHE='tochka-opory-github-supabase-v15-9-stable-assistant-network-first';
-const ASSETS=['./','./index.html','./styles.css','./pilot.css','./workspace.css','./general.css','./v15.css','./supabase.css','./babkin-v154.css','./accessibility-v155.css','./progressive-forms-v155.css','./scenario-ux-v156.css','./public-intake-v156.css','./mega-ux-v157.css','./psych-assistant-v159.css','./app.js','./pilot.js','./general.js','./workspace.js','./v15.js','./supabase-config.js','./supabase-app.js','./babkin-v154.js','./accessibility-v155.js','./progressive-forms-v155.js','./mega-scenarios-v157.js','./unclear-request-v157.js','./scenario-ux-v156.js','./public-intake-v156.js','./mega-ux-v157.js','./psych-assistant-v159.js','./icon.svg','./icon-192.png','./icon-512.png','./manifest.webmanifest'];
-self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',e=>{
-  if(e.request.method!=='GET')return;
-  const u=new URL(e.request.url);
-  if(u.pathname.startsWith('/api/'))return;
-  const code=e.request.mode==='navigate'||/\.(?:js|css|html)$/.test(u.pathname);
-  if(code){
-    e.respondWith(fetch(e.request).then(resp=>{const copy=resp.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return resp;}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))));
-  }else{
-    e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(resp=>{const copy=resp.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return resp;})));
-  }
+/* Точка опоры v16.0 SAFE RECOVERY
+   Временно отключаем перехват запросов service worker, чтобы старая зависающая
+   версия JS больше не возвращалась из PWA-кэша. */
+self.addEventListener('install',function(){self.skipWaiting();});
+self.addEventListener('activate',function(event){
+  event.waitUntil(caches.keys().then(function(keys){
+    return Promise.all(keys.map(function(key){return caches.delete(key);}));
+  }).then(function(){return self.clients.claim();}));
 });
+/* fetch намеренно не перехватывается: все файлы идут напрямую из сети. */
